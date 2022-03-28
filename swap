@@ -1,0 +1,65 @@
+package com.company;
+
+public class Main {
+
+    public static void main(String[] args) {
+        int[][] matrix = {
+            {3, 4, 1},
+            {2, 5, 1},
+            {2, 3, 2}
+        };
+        // showing first matrix
+        System.out.println("First Matrix: ");
+        for (int[] ints : matrix) {
+            for (int anInt : ints) {
+                System.out.print(anInt + " ");
+            }
+            System.out.println();
+        }
+        int columnMin = checkingMin(matrix);
+        int columnMax = checkingMax(matrix);
+        // showing changed matrix
+        int[][] changed = swap(matrix, columnMin, columnMax);
+        System.out.println("Changed Matrix: ");
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+                System.out.print(changed[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+    public static int[][] swap(int[][] matrix, int min, int max) {
+        for (int i = 0; i < matrix.length; i++) {
+            int temp = matrix[i][max];
+            matrix[i][max] = matrix[i][min];
+            matrix[i][min] = temp;
+        }
+        return matrix;
+    }
+    public static int checkingMax(int[][] mat) {
+        int column = 0;
+        int max = 0;
+        for (int[] ints : mat) {
+            for (int j = 0; j < ints.length; j++) {
+                if (ints[j] >= max) {
+                    max = ints[j];
+                    column = j;
+                }
+            }
+        }
+        return column;
+    }
+    public static int checkingMin(int[][] mat) {
+        int min = Integer.MAX_VALUE;
+        int column = 0;
+        for (int[] ints : mat) {
+            for (int j = 0; j < ints.length; j++) {
+                if (ints[j] < min) {
+                    min = ints[j];
+                    column = j;
+                }
+            }
+        }
+        return column;
+    }
+}
